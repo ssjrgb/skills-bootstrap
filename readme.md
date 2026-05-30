@@ -1,6 +1,6 @@
 # Skills Bootstrap
 
-> 一键安装热门 Skills，快速打造你的 AI 开发工具链。
+> Skill深度用户，快速初始化你的cc skill包。
 
 ## 使用方式
 
