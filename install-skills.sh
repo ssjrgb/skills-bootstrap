@@ -167,15 +167,9 @@ REQUIRED_SKILLS=(
   # 产品开发
   "mcp-builder|https://github.com/anthropics/skills"
   "webapp-testing|https://github.com/anthropics/skills"
-  "gstack|https://github.com/garrytan/gstack"
 )
 
-# 必装 npm 工具  格式: name|desc|check_cmd|install_cmds (用 ; 分隔多条)
-REQUIRED_NPM_TOOLS=(
-  "ui-ux-pro-max|UI/UX 设计智能助手, 67 种样式/96 种调色板|uipro|npm install -g uipro-cli;uipro init --ai claude --global"
-)
-
-TOTAL=$((${#REQUIRED_SKILLS[@]} + ${#REQUIRED_NPM_TOOLS[@]}))
+TOTAL=${#REQUIRED_SKILLS[@]}
 
 # 分别记录结果
 SUCCESS_ARR=()
@@ -211,50 +205,8 @@ install_skill() {
   rm -f "$LOGFILE"
 }
 
-# 安装 npm 工具函数 (已安装则跳过)
-install_npm_tool() {
-  local NAME="$1"
-  local CHECK_CMD="$2"
-  local INSTALL_CMDS="$3"
-
-  if command -v "$CHECK_CMD" &>/dev/null; then
-    echo "  ⏭  $CHECK_CMD 已安装, 跳过 $NAME"
-    SKIPPED_ARR+=("$NAME")
-    return 0
-  fi
-
-  echo "  正在安装 $NAME ..."
-
-  IFS=';' read -ra CMDS <<< "$INSTALL_CMDS"
-  ALL_OK=true
-  for cmd in "${CMDS[@]}"; do
-    CMD_CLEAN=$(echo "$cmd" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-    echo "    执行: $CMD_CLEAN"
-    LOGFILE=$(mktemp)
-    if eval "$CMD_CLEAN" >"$LOGFILE" 2>&1; then
-      :
-    else
-      ALL_OK=false
-      REASON=$(grep -v '^[[:space:]]*$' "$LOGFILE" | tail -3 | sed 's/^/    /')
-      if [ -z "$REASON" ]; then
-        REASON="    未知错误"
-      fi
-    fi
-    rm -f "$LOGFILE"
-  done
-
-  if $ALL_OK; then
-    echo "  ✓ $NAME 安装成功"
-    SUCCESS_ARR+=("$NAME")
-  else
-    echo "  ✗ $NAME 安装失败"
-    echo "$REASON"
-    FAIL_ARR+=("${NAME}|${REASON}")
-  fi
-}
-
 # ====== 必装 ======
-echo "─── 必装 Skills ($((${#REQUIRED_SKILLS[@]} + ${#REQUIRED_NPM_TOOLS[@]})) 个) ───"
+echo "─── 必装 Skills (${#REQUIRED_SKILLS[@]} 个) ───"
 echo ""
 
 # npx skills add 方式
@@ -262,18 +214,6 @@ for entry in "${REQUIRED_SKILLS[@]}"; do
   SKILL="${entry%%|*}"
   REPO="${entry##*|}"
   install_skill "$SKILL" "$REPO"
-  echo ""
-done
-
-# npm 方式
-for entry in "${REQUIRED_NPM_TOOLS[@]}"; do
-  NAME="${entry%%|*}"
-  REST="${entry#*|}"
-  DESC="${REST%%|*}"
-  REST2="${REST#*|}"
-  CHECK_CMD="${REST2%%|*}"
-  INSTALL_CMDS="${REST2##*|}"
-  install_npm_tool "$NAME" "$CHECK_CMD" "$INSTALL_CMDS"
   echo ""
 done
 

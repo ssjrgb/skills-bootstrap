@@ -42,11 +42,8 @@ cd skills-bootstrap
 | `pptx`           | PowerPoint 演示文稿创建/读取/编辑：幻灯片排版、模板应用、内容提取与生成                    | Anthropic | 文档处理 | Skill |
 | `pdf`            | 全功能 PDF 处理：文本/表格提取、合并/拆分、旋转、水印、创建、表单、加密/解密、OCR                | Anthropic | 文档处理 | Skill |
 | `xlsx`           | Excel 电子表格创建/读取/编辑：公式、图表、数据透视表、格式化与数据分析                       | Anthropic | 文档处理 | Skill |
-| `humanizer-zh`   | AI 写作去痕工具，识别并修复 24 种 AI 写作痕迹（内容/语言/风格/交流）                     | 藏师傅       | 文档处理 | Skill |
 | `mcp-builder`    | 指导创建高质量 MCP 服务器，支持 Python（FastMCP）和 Node/TypeScript（MCP SDK）  | Anthropic | 产品开发 | Skill |
 | `webapp-testing` | 通过 Playwright 对 Web 应用进行自动化交互测试，验证前端功能、调试 UI、捕获截图             | Anthropic | 产品开发 | Skill |
-| `ui-ux-pro-max`  | UI/UX 设计智能助手，67 种样式、96 种调色板、57 种字体配对、99 条 UX 准则               | uipro     | 产品开发 | npm   |
-| `gstack`         | 元技能 — Garry Tan (YC 总裁) 的 28+ 角色化斜杠命令集，将 Claude Code 变为虚拟工程团队 | Garry Tan | 产品开发 | Skill |
 
 
 ---
@@ -61,6 +58,9 @@ cd skills-bootstrap
 | `openhuman`              | 开源桌面 AI 助手，本地记忆系统 + 118 个第三方集成，TokenJuice 节省约 80% token 消耗       | tinyhumansai   | 效率工具 | curl      | `curl -fsSL https://raw.githubusercontent.com/tinyhumansai/openhuman/main/scripts/install.sh | bash`      |
 | `codegraph`              | 预索引代码知识图谱，约 35% 更少 token、约 70% 更少工具调用，100% 本地，支持 19+ 语言          | colbymchenry   | 效率工具 | npm       | `npx @colbymchenry/codegraph`                                                                             |
 | `superpowers`            | 系统化软件开发方法论，7 阶段工作流（头脑风暴→Worktree→计划→子代理开发→TDD→审查→完成）             | obra           | 产品开发 | Plugin    | `/plugin install superpowers@claude-plugins-official`                                                     |
+| `gstack`                 | 元技能 — Garry Tan (YC 总裁) 的 28+ 角色化斜杠命令集，将 Claude Code 变为虚拟工程团队 | Garry Tan | 产品开发 | git-clone | `git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git ~/.claude/skills/gstack && cd ~/.claude/skills/gstack && ./setup` |
+| `ui-ux-pro-max` | UI/UX 设计智能助手，67 种样式、96 种调色板、57 种字体配对、99 条 UX 准则 | uipro | 产品开发 | npm | `npm install -g uipro-cli && uipro init --ai claude --global` |
+| `humanizer-zh` | AI 写作去痕工具，识别并修复 24 种 AI 写作痕迹 | 藏师傅 | 文档处理 | Skill | `npx skills add https://github.com/op7418/humanizer-zh --skill humanizer-zh -y -g` |
 | `office-hours`           | 产品构思设计思维工具，通过结构化对话帮助打磨产品想法                                       | Meteorite Labs | 产品开发 | git-clone | `git clone https://github.com/MeteoriteLabs/AoA-Skills.git ~/.claude/plugins/aoa-skills`                  |
 | `last30days`             | 跨平台研究代理，聚合 Reddit/X/YouTube/HN/Polymarket 等 10+ 平台近 30 天内容       | mvanhorn       | 效率工具 | Skill     | `npx skills add https://github.com/mvanhorn/last30days-skill --skill last30days -y -g`                    |
 | `bb-browser`             | Browserbase 浏览器自动化技能集，支持反爬隐身、CAPTCHA 破解、住宅代理、UI 测试               | Browserbase    | 浏览器  | Skill     | `npx skills add browserbase/skills -y -g`                                                                 |
