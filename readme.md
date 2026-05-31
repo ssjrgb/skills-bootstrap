@@ -20,7 +20,7 @@
 ## 使用方式
 
 ```bash
-git clone git@github.com:ssj-rgb/skills-bootstrap.git
+git clone git@github.com:ssjrgb/skills-bootstrap.git
 cd skills-bootstrap
 
 # 一键安装
